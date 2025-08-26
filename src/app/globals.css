@@ -4,6 +4,11 @@
     themes: dim --default;
 }
 
+@theme {
+    --width-rscreen: 100dvw;
+    --height-rscreen: 100dvh;
+}
+
 @layer base {
     * {
         @apply select-none;
