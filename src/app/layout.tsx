@@ -1,3 +1,4 @@
+import { fonts } from "@/utils/fonts";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`antialiased`}>{children}</body>
+            <body className={`${fonts.baloo2.className} antialiased`}>
+                {children}
+            </body>
         </html>
     );
 }

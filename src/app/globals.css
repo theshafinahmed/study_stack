@@ -9,6 +9,10 @@
     --height-rscreen: 100dvh;
 }
 
+@utility btn {
+    @apply rounded-full shadow-none font-bold will-change-transform! uppercase active:translate-none!;
+}
+
 @layer base {
     * {
         @apply select-none;
