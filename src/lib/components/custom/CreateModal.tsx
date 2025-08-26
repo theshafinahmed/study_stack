@@ -8,13 +8,13 @@ function CreateModal({ onClose }: { onClose: () => void }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 backdrop-blur-xl flex items-center justify-center z-50"
+            className="fixed inset-0 backdrop-blur-xl flex items-center justify-center p-8"
         >
             <motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                className="card bg-base-100 w-96 shadow-xl"
+                className="card bg-base-100 w-full max-w-96 shadow-xl"
             >
                 <div className="card-body">
                     <div className="flex items-center justify-between">
