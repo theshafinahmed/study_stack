@@ -13,7 +13,7 @@ function StudyCard({
     dueDate: string;
 }) {
     return (
-        <div className="card bg-base-100 w-96 shadow-sm">
+        <div className="card bg-base-100 w-full shadow-sm">
             <div className="card-body">
                 <div className="flex items-center justify-between">
                     <h2 className="card-title">{subject}</h2>
