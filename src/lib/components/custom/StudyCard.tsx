@@ -29,14 +29,20 @@ function StudyCard({
             drag
             layout
             dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 1, y: 100 }}
-            className="card bg-base-100 w-full h-min shadow-sm"
+            transition={{
+                type: "spring",
+                stiffness: 1000,
+                damping: 10,
+                mass: 1,
+            }}
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            exit={{ scaleX: 0, originX: "left", transition: { duration: 0.1 } }}
+            className="bg-neutral text-neutral-content rounded-2xl w-full md:max-w-[400px] h-min shadow-sm"
         >
-            <div className="card-body">
+            <div className="flex flex-col p-4 gap-2">
                 <div className="flex items-center justify-between">
-                    <h2 className="card-title">{subject}</h2>
+                    <h2 className="text-2xl font-bold">{subject}</h2>
                     <Button
                         onClick={handleClose}
                         className="btn-ghost btn-sm text-error"
@@ -45,10 +51,10 @@ function StudyCard({
                     </Button>
                 </div>
                 <p className="whitespace-pre-wrap">{task}</p>
-                <div className="card-actions justify-between">
-                    <div className="flex flex-col opacity-70">
+                <div className="flex items-center justify-between">
+                    <div className="flex flex-col text-sm opacity-70">
                         <p>Created At: {createdAt}</p>
-                        <p>Due Date: {dueDate}</p>
+                        <p>Due Date: {dueDate ? dueDate : "No due date"}</p>
                     </div>
                     <Button className="btn-primary">Done</Button>
                 </div>

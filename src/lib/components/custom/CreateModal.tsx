@@ -78,6 +78,7 @@ function CreateModal({ onClose }: { onClose: () => void }) {
                     </div>
                     <div className="card-actions justify-end">
                         <Button
+                            disabled={!subject || !task || !startDate}
                             className="btn-primary"
                             onClick={() => {
                                 addTask({

@@ -13,7 +13,7 @@ function Home() {
         <main className="w-rscreen h-rscreen p-4 pt-20 flex flex-col">
             <Header />
             {studyTasks.length != 0 ? (
-                <section className="w-full h-full overflow-scroll grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4 overflow-y-auto">
+                <section className="w-full h-full overflow-y-scroll flex flex-wrap content-start gap-4">
                     <AnimatePresence>
                         {studyTasks.map((task) => (
                             <StudyCard

@@ -13,7 +13,7 @@ function CreateTaskButton() {
     const closeModal = () => setIsModalOpen(false);
     return (
         <>
-            <Button className="btn-secondary" onClick={openModal}>
+            <Button className="btn-primary" onClick={openModal}>
                 <Icon icon="hugeicons:quill-write-02" className="size-6" />
             </Button>
             <AnimatePresence>
