@@ -4,6 +4,7 @@ import StudyCard from "@/lib/components/custom/StudyCard";
 import Header from "@/lib/components/pages/home/Header";
 import { useTaskStore } from "@/store/useTaskStore";
 import { Icon } from "@iconify/react";
+import { AnimatePresence } from "motion/react";
 
 function Home() {
     const { studyTasks } = useTaskStore();
@@ -12,17 +13,19 @@ function Home() {
         <main className="w-rscreen h-rscreen p-4 pt-20 flex flex-col">
             <Header />
             {studyTasks.length != 0 ? (
-                <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4 overflow-y-auto">
-                    {studyTasks.map((task) => (
-                        <StudyCard
-                            key={task.id}
-                            id={task.id}
-                            subject={task.subject}
-                            task={task.task}
-                            createdAt={task.startDate}
-                            dueDate={task.endDate}
-                        />
-                    ))}
+                <section className="w-full h-full overflow-scroll grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4 overflow-y-auto">
+                    <AnimatePresence>
+                        {studyTasks.map((task) => (
+                            <StudyCard
+                                key={task.id}
+                                id={task.id}
+                                subject={task.subject}
+                                task={task.task}
+                                createdAt={task.startDate}
+                                dueDate={task.endDate}
+                            />
+                        ))}
+                    </AnimatePresence>
                 </section>
             ) : (
                 <section className="w-full h-full flex flex-col gap-2 items-center justify-center text-neutral-content/50">

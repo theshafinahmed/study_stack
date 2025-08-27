@@ -2,6 +2,7 @@
 
 import { useTaskStore } from "@/store/useTaskStore";
 import { Icon } from "@iconify/react";
+import { motion } from "motion/react";
 import Button from "./Button";
 
 function StudyCard({
@@ -24,7 +25,15 @@ function StudyCard({
     };
 
     return (
-        <div className="card bg-base-100 w-full shadow-sm">
+        <motion.div
+            drag
+            layout
+            dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 1, y: 100 }}
+            className="card bg-base-100 w-full h-min shadow-sm"
+        >
             <div className="card-body">
                 <div className="flex items-center justify-between">
                     <h2 className="card-title">{subject}</h2>
@@ -44,7 +53,7 @@ function StudyCard({
                     <Button className="btn-primary">Done</Button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
