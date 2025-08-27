@@ -1,34 +1,22 @@
 "use client";
 
-import { useTaskStore } from "@/store/useTaskStore";
 import { Icon } from "@iconify/react";
+import { useMutation } from "convex/react";
 import { motion } from "motion/react";
+import { api } from "../../../../convex/_generated/api";
+import { StudyTask } from "../../../../types";
 import Button from "./Button";
 
-function StudyCard({
-    id,
-    subject,
-    task,
-    createdAt,
-    dueDate,
-}: {
-    id: string;
-    subject: string;
-    task: string;
-    createdAt: string;
-    dueDate: string;
-}) {
-    const { removeTask } = useTaskStore();
+function StudyCard(studyTask: StudyTask) {
+    const removeTask = useMutation(api.tasks.removeTask);
 
     const handleClose = () => {
-        removeTask(id);
+        removeTask({ taskId: studyTask._id });
     };
 
     return (
         <motion.div
-            drag
             layout
-            dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
             transition={{
                 type: "spring",
                 stiffness: 1000,
@@ -42,7 +30,7 @@ function StudyCard({
         >
             <div className="flex flex-col p-4 gap-2">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-bold">{subject}</h2>
+                    <h2 className="text-2xl font-bold">{studyTask.subject}</h2>
                     <Button
                         onClick={handleClose}
                         className="btn-ghost btn-sm text-error"
@@ -50,11 +38,16 @@ function StudyCard({
                         <Icon icon="mingcute:close-fill" className="size-6" />
                     </Button>
                 </div>
-                <p className="whitespace-pre-wrap">{task}</p>
+                <p className="whitespace-pre-wrap">{studyTask.task}</p>
                 <div className="flex items-center justify-between">
                     <div className="flex flex-col text-sm opacity-70">
-                        <p>Created At: {createdAt}</p>
-                        <p>Due Date: {dueDate ? dueDate : "No due date"}</p>
+                        <p>Created At: {studyTask.startDate}</p>
+                        <p>
+                            Due Date:{" "}
+                            {studyTask.endDate
+                                ? studyTask.endDate
+                                : "No due date"}
+                        </p>
                     </div>
                     <Button className="btn-primary">Done</Button>
                 </div>

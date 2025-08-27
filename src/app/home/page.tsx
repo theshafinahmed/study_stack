@@ -2,27 +2,35 @@
 
 import StudyCard from "@/lib/components/custom/StudyCard";
 import Header from "@/lib/components/pages/home/Header";
-import { useTaskStore } from "@/store/useTaskStore";
+import { useAuth } from "@clerk/nextjs";
 import { Icon } from "@iconify/react";
+import { useQuery } from "convex/react";
 import { AnimatePresence } from "motion/react";
+import { api } from "../../../convex/_generated/api";
 
 function Home() {
-    const { studyTasks } = useTaskStore();
+    const { userId } = useAuth();
+
+    const studyTasks = useQuery(
+        api.tasks.getTasks,
+        userId ? { userId } : "skip"
+    );
 
     return (
         <main className="w-rscreen h-rscreen p-4 pt-20 flex flex-col">
             <Header />
-            {studyTasks.length != 0 ? (
+            {userId && studyTasks && studyTasks.length != 0 ? (
                 <section className="w-full h-full overflow-y-scroll flex flex-wrap content-start gap-4">
                     <AnimatePresence>
                         {studyTasks.map((task) => (
                             <StudyCard
-                                key={task.id}
-                                id={task.id}
+                                key={task._id}
+                                _id={task._id}
                                 subject={task.subject}
                                 task={task.task}
-                                createdAt={task.startDate}
-                                dueDate={task.endDate}
+                                startDate={task.startDate}
+                                endDate={task.endDate}
+                                userId={userId}
                             />
                         ))}
                     </AnimatePresence>

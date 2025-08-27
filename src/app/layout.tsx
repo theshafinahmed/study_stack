@@ -1,6 +1,7 @@
 import { fonts } from "@/utils/fonts";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata, Viewport } from "next";
+import { ConvexClientProvider } from "./ConvexClientProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function RootLayout({
         <ClerkProvider>
             <html lang="en">
                 <body className={`${fonts.baloo2.className} antialiased`}>
-                    {children}
+                    <ConvexClientProvider>{children}</ConvexClientProvider>
                 </body>
             </html>
         </ClerkProvider>
