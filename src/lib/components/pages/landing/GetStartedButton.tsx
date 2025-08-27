@@ -1,19 +1,15 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import { SignInButton } from "@clerk/nextjs";
 import Button from "../../custom/Button";
 
 function GetStartedButton() {
-    const router = useRouter();
-
-    const handleClick = () => {
-        router.push("/home");
-    };
-
     return (
-        <Button className="btn-primary" onClick={handleClick}>
-            Get Started
-        </Button>
+        <SignInButton
+            mode="modal"
+            forceRedirectUrl={"/home"}
+            signUpForceRedirectUrl={"/home"}
+        >
+            <Button className="btn-primary">Get Started</Button>
+        </SignInButton>
     );
 }
 
