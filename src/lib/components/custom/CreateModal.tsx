@@ -1,8 +1,18 @@
+"use client";
+
+import { useTaskStore } from "@/store/useTaskStore";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Button from "./Button";
 
 function CreateModal({ onClose }: { onClose: () => void }) {
+    const [subject, setSubject] = useState("");
+    const [task, setTask] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const { addTask } = useTaskStore();
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -32,6 +42,8 @@ function CreateModal({ onClose }: { onClose: () => void }) {
                     <div>
                         <label className="label">Subject</label>
                         <input
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)}
                             type="text"
                             placeholder="Enter subject"
                             className="input input-bordered"
@@ -40,20 +52,46 @@ function CreateModal({ onClose }: { onClose: () => void }) {
                     <div>
                         <label className="label">Task</label>
                         <textarea
+                            value={task}
+                            onChange={(e) => setTask(e.target.value)}
                             placeholder="Enter task"
                             className="textarea textarea-bordered"
                         />
                     </div>
                     <div>
                         <label className="label">Start Date</label>
-                        <input type="date" className="input input-bordered" />
+                        <input
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            type="date"
+                            className="input input-bordered"
+                        />
                     </div>
                     <div>
                         <label className="label">End Date (Optional)</label>
-                        <input type="date" className="input input-bordered" />
+                        <input
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            type="date"
+                            className="input input-bordered"
+                        />
                     </div>
                     <div className="card-actions justify-end">
-                        <Button className="btn-primary">Create</Button>
+                        <Button
+                            className="btn-primary"
+                            onClick={() => {
+                                addTask({
+                                    id: crypto.randomUUID(),
+                                    subject,
+                                    task,
+                                    startDate,
+                                    endDate,
+                                });
+                                onClose();
+                            }}
+                        >
+                            Create
+                        </Button>
                     </div>
                 </div>
             </motion.div>
