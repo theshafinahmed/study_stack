@@ -44,6 +44,14 @@ function CreateModal({ onClose }: { onClose: () => void }) {
                             className="textarea textarea-bordered"
                         />
                     </div>
+                    <div>
+                        <label className="label">Start Date</label>
+                        <input type="date" className="input input-bordered" />
+                    </div>
+                    <div>
+                        <label className="label">End Date (Optional)</label>
+                        <input type="date" className="input input-bordered" />
+                    </div>
                     <div className="card-actions justify-end">
                         <Button className="btn-primary">Create</Button>
                     </div>
